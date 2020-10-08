@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Search( {handleInput, search }) {
+function Search( {handleInput, handleInputYear, handleInputMovieType, search }) {
     return (
        <section className="searchbox-wrap">
            <form action="">
@@ -15,12 +15,16 @@ function Search( {handleInput, search }) {
                 type="text" 
                 className="searchbox" 
                 placeholder="Year"
+                onChange={handleInputYear}
+                onKeyPress={search}
             />
-            <select class="searchbox" >
+            <select class="searchbox" onChange={handleInputMovieType}
+                onKeyPress={search} >
                 <option value="movie">Movie</option>
                 <option value="series">Series</option>
                 <option value="episode">Episode</option>
-            </select>
+                
+            /></select>
             {/* TODO Add year, movie type and submit button */}
             {/* <input 
                 type="submit" 

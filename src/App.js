@@ -8,6 +8,8 @@ import Popup from './components/Popup'
 function App() {
   const [state, setState] = useState({
     s: "",
+    y: "",
+    m: "movie",
     results: [],
     selected: {}
   });
@@ -15,9 +17,10 @@ function App() {
 
   const search = (e) => {
     if (e.key === "Enter") {
-      axios(apiurl + "&s=" + state.s).then(({ data }) => {
+      const a = apiurl + "&s=" + state.s + "&y=" + state.y + "&type=" + state.m
+      console.log(a)
+      axios(apiurl + "&s=" + state.s + "&y=" + state.y + "&type=" + state.m).then(({ data }) => {
         let results = data.Search;
-
         setState(prevState => {
           return { ...prevState, results: results }
         })
@@ -30,6 +33,22 @@ function App() {
 
     setState(prevState => {
       return { ...prevState, s: s }
+    });
+  }
+
+  const handleInputYear = (e) => {
+    let y = e.target.value;
+
+    setState(prevState => {
+      return { ...prevState, y: y }
+    });
+  }
+
+  const handleInputMovieType = (e) => {
+    let m = e.target.value;
+
+    setState(prevState => {
+      return { ...prevState, m: m }
     });
   }
 
@@ -57,7 +76,7 @@ function App() {
         <h1>Movie Database</h1>
       </header>
       <main>
-        <Search handleInput={handleInput} search={search} />
+        <Search handleInput={handleInput} handleInputYear={handleInputYear} handleInputMovieType={handleInputMovieType} search={search} />
 
         <Results results={state.results} openPopup={openPopup} />
 
