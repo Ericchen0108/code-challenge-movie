@@ -17,8 +17,6 @@ function App() {
 
   const search = (e) => {
     if (e.key === "Enter") {
-      const a = apiurl + "&s=" + state.s + "&y=" + state.y + "&type=" + state.m
-      console.log(a)
       axios(apiurl + "&s=" + state.s + "&y=" + state.y + "&type=" + state.m).then(({ data }) => {
         let results = data.Search;
         setState(prevState => {
@@ -55,8 +53,6 @@ function App() {
   const openPopup = id => {
     axios(apiurl + "&i=" + id).then(({ data }) => {
       let result = data;
-
-      console.log(result);
 
       setState(prevState => {
         return { ...prevState, selected: result }
